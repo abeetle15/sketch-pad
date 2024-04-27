@@ -2,6 +2,18 @@
 const pad = document.querySelector('.pad');
 const resizeBtn = document.querySelector('.resizeBtn');
 const clearBtn = document.querySelector('.clearBtn');
+const blackColor = document.querySelector('.black')
+const redColor = document.querySelector('.red')
+const greenColor = document.querySelector('.green')
+const blueColor = document.querySelector('.blue')
+const yellowColor = document.querySelector('.yellow')
+
+const black = 'rgb(9, 9, 9)';
+const red = 'rgb(247, 5, 22)';
+const green = 'rgb(63, 173, 50)';
+const blue = '#2279CE';
+const yellow = '#FDF124';
+const color = black;
 
 
 
@@ -65,22 +77,30 @@ function checkMouse() {
 function pixelEvent() {
   if (mouseFlag) {
     pixels.forEach((pixel) => {
-      pixel.addEventListener('mouseenter', paintFlag);
+      pixel.addEventListener('mouseenter', paint);
     })
 
   } else if (!mouseFlag) {
     pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseenter', paintFlag)
+      pixel.removeEventListener('mouseenter', paint)
 
     })
   }
 }
 
-function paintFlag(event) {
-  event.target.style.backgroundColor = '#000000';
-  console.log('im in!')
+const changeColor = function (choice) {
+  color = choice;
 }
 
+function paint(event) {
+  event.target.style.backgroundColor = color;
+}
+
+// black.addEventListener('click', changeColor(black));
+// red.addEventListener('click', changeColor(red));
+// green.addEventListener('click', changeColor(green));
+// blue.addEventListener('click', changeColor(blue));
+// yellow.addEventListener('click', changeColor(yellow));
 
 const pixels = document.querySelectorAll('.pixel');
 
