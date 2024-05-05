@@ -136,25 +136,25 @@ button:hover {
 }
 
 .hoverBlack:hover {
-  background-color: rgb(9, 9, 9);
+  background-color: rgb(9, 9, 9) !important;
 }
 
 .hoverRed:hover {
-  background-color: rgb(247, 5, 22);
+  background-color: rgb(247, 5, 22) !important;
 }
 
 .hoverGreen:hover {
-  background-color: rgb(63, 173, 50);
+  background-color: rgb(63, 173, 50) !important;
 }
 
 .hoverBlue:hover {
-  background-color: #2279CE;
+  background-color: #2279CE !important;
 }
 
 .hoverYellow:hover {
-  background-color: #FDF124;
+  background-color: #FDF124 !important;
 }
 
 .hoverWhite:hover {
-  background-color: rgb(208, 208, 198);
+  background-color: rgb(208, 208, 198) !important;
 }
