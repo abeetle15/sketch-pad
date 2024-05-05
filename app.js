@@ -6,21 +6,61 @@ const blackColor = document.querySelector('.black')
 const redColor = document.querySelector('.red')
 const greenColor = document.querySelector('.green')
 const blueColor = document.querySelector('.blue')
-const yellowColor = document.querySelector('.yellow')
+const yellowColor = document.querySelector('.yellow');
+let globPix;
+
 
 const black = 'rgb(9, 9, 9)';
 const red = 'rgb(247, 5, 22)';
 const green = 'rgb(63, 173, 50)';
 const blue = '#2279CE';
 const yellow = '#FDF124';
-const color = black;
 
+let color = black;
+let mouseFlag = false;
+let pixels = document.querySelectorAll('.pixel');
 
+clearBtn.addEventListener('click', () => {
+  clear();
+  console.log('bórrate')
+});
 
-// when page loads create 16x16 grid of divs in the pad
-window.addEventListener('DOMContentLoaded', createGrid(60));
+blackColor.addEventListener('click', () => {
+  changeColor(black)
+
+})
+redColor.addEventListener('click', () => {
+  changeColor(red)
+})
+greenColor.addEventListener('click', () => {
+  changeColor(green)
+})
+blueColor.addEventListener('click', () => {
+  changeColor(blue)
+})
+yellowColor.addEventListener('click', () => {
+  changeColor(yellow)
+})
+
+// blackColor.addEventListener('click', changeColor(black));
+// redColor.addEventListener('click', changeColor(red));
+// greenColor.addEventListener('click', changeColor(green));
+// blueColor.addEventListener('click', changeColor(blue));
+// yellowColor.addEventListener('click', changeColor(yellow));
+
+// resize when user clicks btn
+resizeBtn.addEventListener('click', () => {
+  resize()
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  createGrid(60);
+  adEv();
+})
+
 
 function createGrid(resolution) {
+
   for (let i = 1; i <= (resolution * resolution); i++) {
     const newDiv = document.createElement('div')
     newDiv.classList.add('pixel')
@@ -29,42 +69,19 @@ function createGrid(resolution) {
     newDiv.setAttribute('style', `flex-basis: ${perc}%`)
   }
 
-  adEv();
 }
-
-// clear button
-clearBtn.addEventListener('click', () => {
-  pad.innerHTML = '';
-  createGrid(60);
-  adEv();
-})
-
-// resize when user clicks btn
-resizeBtn.addEventListener('click', () => { resize(); });
-function resize() {
-  pad.innerHTML = '';
-  let userSize = prompt('please input a number between 1 and 100')
-  if (userSize < 0 || userSize > 100) {
-    alert('your number is outside of the range\nplease follow insctrucitons')
-  }
-
-  createGrid(userSize);
-  adEv();
-}
-
-// function on click that changes color to black for each div
-let mouseFlag = false;
 
 function adEv() {
-  pad.addEventListener('mousedown', handler)
+  pad.addEventListener('mousedown', handler);
 }
 
 function handler() {
-  checkMouse();
-  pixelEvent();
-}
 
-function checkMouse() {
+  let pixels = document.querySelectorAll('.pixel');
+  globPix = pixels;
+
+
+  // Check Mouse
   if (!mouseFlag) {
     mouseFlag = true;
     console.log(mouseFlag);
@@ -72,35 +89,42 @@ function checkMouse() {
     mouseFlag = false;
     console.log(mouseFlag);
   }
-}
-
-function pixelEvent() {
-  if (mouseFlag) {
-    pixels.forEach((pixel) => {
-      pixel.addEventListener('mouseenter', paint);
-    })
-
-  } else if (!mouseFlag) {
-    pixels.forEach((pixel) => {
-      pixel.removeEventListener('mouseenter', paint)
-
-    })
-  }
-}
-
-const changeColor = function (choice) {
-  color = choice;
+  // pixelEvent
+  console.log('se esta poniendo pixelEvent')
+  pixels.forEach((pixel) => {
+    pixel.addEventListener('mouseenter', paint);
+  })
 }
 
 function paint(event) {
-  event.target.style.backgroundColor = color;
+  console.log(event.target)
+  if (mouseFlag) {
+    console.log('estamos pintando')
+
+    event.target.style.backgroundColor = color;
+  } else {
+    console.log('no quiero pintar :(')
+  }
 }
 
-// black.addEventListener('click', changeColor(black));
-// red.addEventListener('click', changeColor(red));
-// green.addEventListener('click', changeColor(green));
-// blue.addEventListener('click', changeColor(blue));
-// yellow.addEventListener('click', changeColor(yellow));
+function changeColor(choice) {
+  color = choice;
+}
 
-const pixels = document.querySelectorAll('.pixel');
+function resize() {
+  pad.innerHTML = '';
+  let userSize = prompt('please input a number between 1 and 100')
+  if (userSize < 0 || userSize > 100) {
+    alert('your number is outside of the range\nplease follow insctrucitons')
+  } else {
+    createGrid(userSize);
+
+  }
+}
+
+function clear() {
+  globPix.forEach((pixel) => {
+    pixel.style.backgroundColor = 'rgb(248, 248, 246)';
+  })
+}
 
