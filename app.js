@@ -19,6 +19,7 @@ const yellow = '#FDF124';
 const white = 'rgb(248, 248, 246)';
 
 let userSize;
+let globSize;
 let color = black;
 let colorName = 'black';
 let mouseFlag = false;
@@ -120,21 +121,26 @@ function resize() {
     pad.innerHTML = '';
     createGrid(userSize);
     hoverEffect();
+    globSize = userSize;
   }
 }
 
 function clear() {
-  if (userSize) {
+  if (globSize) {
+
     pad.innerHTML = '';
-    createGrid(userSize);
+    createGrid(globSize);
     hoverEffect();
   } else {
+
     pad.innerHTML = '';
     createGrid(60);
     hoverEffect();
   }
 
-  globPix.forEach((pixel) => {
+  let pixels = document.querySelectorAll('.pixel');
+
+  pixels.forEach((pixel) => {
     pixel.classList.remove('hover' + colorName)
   })
   hoverEffect();
