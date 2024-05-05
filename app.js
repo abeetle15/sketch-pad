@@ -22,7 +22,6 @@ let pixels = document.querySelectorAll('.pixel');
 
 clearBtn.addEventListener('click', () => {
   clear();
-  console.log('bórrate')
 });
 
 blackColor.addEventListener('click', () => {
@@ -42,13 +41,7 @@ yellowColor.addEventListener('click', () => {
   changeColor(yellow)
 })
 
-// blackColor.addEventListener('click', changeColor(black));
-// redColor.addEventListener('click', changeColor(red));
-// greenColor.addEventListener('click', changeColor(green));
-// blueColor.addEventListener('click', changeColor(blue));
-// yellowColor.addEventListener('click', changeColor(yellow));
 
-// resize when user clicks btn
 resizeBtn.addEventListener('click', () => {
   resize()
 });
@@ -84,26 +77,24 @@ function handler() {
   // Check Mouse
   if (!mouseFlag) {
     mouseFlag = true;
-    console.log(mouseFlag);
+
   } else if (mouseFlag) {
     mouseFlag = false;
-    console.log(mouseFlag);
+
   }
   // pixelEvent
-  console.log('se esta poniendo pixelEvent')
   pixels.forEach((pixel) => {
     pixel.addEventListener('mouseenter', paint);
   })
 }
 
 function paint(event) {
-  console.log(event.target)
   if (mouseFlag) {
-    console.log('estamos pintando')
+
 
     event.target.style.backgroundColor = color;
   } else {
-    console.log('no quiero pintar :(')
+
   }
 }
 
