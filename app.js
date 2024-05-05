@@ -134,6 +134,19 @@ function eraser() {
   changeColor(white);
 }
 
+function clear() {
+  globPix.forEach((pixel) => {
+    pixel.style.backgroundColor = 'rgb(248, 248, 246)';
+  });
+
+  globPix.forEach((pixel) => {
+    pixel.classList.remove('hover' + colorName)
+  }
+  )
+
+  hoverEffect();
+}
+
 function prevColor() {
   if (userColors.length > 1) {
     color = userColors[(userColors.length - 2)];
@@ -153,11 +166,6 @@ function resize() {
   }
 }
 
-function clear() {
-  globPix.forEach((pixel) => {
-    pixel.style.backgroundColor = 'rgb(248, 248, 246)';
-  })
-}
 
 function colorNamer(currCol) {
   switch (currCol) {
