@@ -18,7 +18,7 @@ const blue = '#2279CE';
 const yellow = '#FDF124';
 const white = 'rgb(248, 248, 246)';
 
-
+let userSize;
 let color = black;
 let colorName = 'black';
 let mouseFlag = false;
@@ -106,6 +106,41 @@ function hoverEffect() {
   })
 }
 
+function eraser() {
+  changeColor(white);
+}
+
+function resize() {
+  let userSize = prompt('please input a number between 1 and 100\nsmall number = big pixels\nthis will clear the current drawing')
+  if (userSize < 0 || userSize > 100) {
+    alert('your number is outside of the range\nplease follow insctrucitons')
+  } else if (userSize === null) {
+    return;
+  } else {
+    pad.innerHTML = '';
+    createGrid(userSize);
+    hoverEffect();
+  }
+}
+
+function clear() {
+  if (userSize) {
+    pad.innerHTML = '';
+    createGrid(userSize);
+    hoverEffect();
+  } else {
+    pad.innerHTML = '';
+    createGrid(60);
+    hoverEffect();
+  }
+
+  globPix.forEach((pixel) => {
+    pixel.classList.remove('hover' + colorName)
+  })
+  hoverEffect();
+
+}
+
 function changeColor(choice) {
   // remove previous color hover class
   let pixels = document.querySelectorAll('.pixel');
@@ -130,42 +165,11 @@ function changeColor(choice) {
   })
 }
 
-function eraser() {
-  changeColor(white);
-}
-
-function clear() {
-  globPix.forEach((pixel) => {
-    pixel.style.backgroundColor = 'rgb(248, 248, 246)';
-  });
-
-  globPix.forEach((pixel) => {
-    pixel.classList.remove('hover' + colorName)
-  }
-  )
-
-  hoverEffect();
-}
-
 function prevColor() {
   if (userColors.length > 1) {
     color = userColors[(userColors.length - 2)];
   }
 };
-
-function resize() {
-  let userSize = prompt('please input a number between 1 and 100\nsmall number = big pixels\nthis will clear the current drawing')
-  if (userSize < 0 || userSize > 100) {
-    alert('your number is outside of the range\nplease follow insctrucitons')
-  } else if (userSize === null) {
-    return;
-  } else {
-    pad.innerHTML = '';
-    createGrid(userSize);
-    hoverEffect();
-  }
-}
-
 
 function colorNamer(currCol) {
   switch (currCol) {
