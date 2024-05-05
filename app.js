@@ -1,4 +1,5 @@
 // const all the elemnts
+const body = document.querySelector('body');
 const pad = document.querySelector('.pad');
 const drawBtn = document.querySelector('.drawBtn');
 const eraseBtn = document.querySelector('.eraseBtn');
@@ -68,13 +69,14 @@ function adEv() {
 
     } else if (mouseFlag) {
       mouseFlag = false;
-
     }
     // when user wants to paint every div mouse enter gets colored
     pixels.forEach((pixel) => {
       pixel.addEventListener('mousemove', paint);
     })
     e.target.style.backgroundColor = color;
+
+    cursorImg();
   });
 }
 
@@ -104,6 +106,16 @@ function hoverEffect() {
       e.target.classList.remove('hover' + colorName)
     })
   })
+}
+
+function cursorImg() {
+  if (mouseFlag) {
+    body.classList.add('paintBrush');
+    console.log(body.classList);
+  } else if (!mouseFlag) {
+    body.classList.remove('paintBrush');
+    console.log(body.classList);
+  }
 }
 
 function eraser() {
