@@ -27,8 +27,6 @@ let userColors = [black];
 
 let pixels = document.querySelectorAll('.pixel');
 
-drawBtn.addEventListener('click', e => { prevColor() })
-
 eraseBtn.addEventListener('click', e => { eraser() })
 
 clearBtn.addEventListener('click', e => { clear() })
