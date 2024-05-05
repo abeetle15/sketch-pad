@@ -135,6 +135,26 @@ button:hover {
   flex: 1 1;
 }
 
-.pixel:hover {
+.hoverBlack:hover {
   background-color: rgb(9, 9, 9);
+}
+
+.hoverRed:hover {
+  background-color: rgb(247, 5, 22);
+}
+
+.hoverGreen:hover {
+  background-color: rgb(63, 173, 50);
+}
+
+.hoverBlue:hover {
+  background-color: #2279CE;
+}
+
+.hoverYellow:hover {
+  background-color: #FDF124;
+}
+
+.hoverWhite:hover {
+  background-color: rgb(208, 208, 198);
 }

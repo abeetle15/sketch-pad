@@ -10,6 +10,7 @@ const greenColor = document.querySelector('.green')
 const blueColor = document.querySelector('.blue')
 const yellowColor = document.querySelector('.yellow');
 
+// const all colors to use in functions
 const black = 'rgb(9, 9, 9)';
 const red = 'rgb(247, 5, 22)';
 const green = 'rgb(63, 173, 50)';
@@ -17,10 +18,11 @@ const blue = '#2279CE';
 const yellow = '#FDF124';
 const white = 'rgb(248, 248, 246)';
 
-let globPix;
-let userColors = [black];
+
 let color = black;
+let colorName = 'black';
 let mouseFlag = false;
+let userColors = [black];
 
 let pixels = document.querySelectorAll('.pixel');
 
@@ -28,37 +30,21 @@ drawBtn.addEventListener('click', e => { prevColor() })
 
 eraseBtn.addEventListener('click', e => { eraser() })
 
-clearBtn.addEventListener('click', e => {
-  clear();
-});
+clearBtn.addEventListener('click', e => { clear() })
 
-blackColor.addEventListener('click', e => {
-  changeColor(black)
+resizeBtn.addEventListener('click', e => { resize() })
 
-})
-redColor.addEventListener('click', e => {
-  changeColor(red)
-})
-greenColor.addEventListener('click', e => {
-  changeColor(green)
-})
-blueColor.addEventListener('click', e => {
-  changeColor(blue)
-})
-yellowColor.addEventListener('click', e => {
-  changeColor(yellow)
-})
-
-
-resizeBtn.addEventListener('click', e => {
-  resize()
-});
+blackColor.addEventListener('click', e => { changeColor(black) })
+redColor.addEventListener('click', e => { changeColor(red) })
+greenColor.addEventListener('click', e => { changeColor(green) })
+blueColor.addEventListener('click', e => { changeColor(blue) })
+yellowColor.addEventListener('click', e => { changeColor(yellow) })
 
 document.addEventListener('DOMContentLoaded', e => {
   createGrid(60);
   adEv();
+  hoverEffect();
 })
-
 
 function createGrid(resolution) {
 
@@ -101,9 +87,47 @@ function paint(event) {
   }
 }
 
+function hoverEffect() {
+  colorNamer(color);
+
+  // add hover class when cursor enters
+  let pixels = document.querySelectorAll('.pixel');
+  pixels.forEach((pixel) => {
+    pixel.addEventListener('mouseenter', e => {
+      e.target.classList.add('hover' + colorName)
+    })
+  })
+
+  // remove hover class when it leaves
+  pixels.forEach((pixel) => {
+    pixel.addEventListener('mouseleave', e => {
+      e.target.classList.remove('hover' + colorName)
+    })
+  })
+}
+
 function changeColor(choice) {
+  // remove previous color hover class
+  let pixels = document.querySelectorAll('.pixel');
+  pixels.forEach((pixel) => {
+    pixel.addEventListener('mouseover', e => {
+      e.target.classList.remove('hover' + colorName)
+    })
+  })
+
+  // change color
   color = choice;
   userColors.push(color);
+
+  // update name
+  colorNamer(color)
+
+  // add new color hover class
+  pixels.forEach((pixel) => {
+    pixel.addEventListener('mouseover', e => {
+      e.target.classList.add('hover' + colorName)
+    })
+  })
 }
 
 function eraser() {
@@ -123,7 +147,7 @@ function resize() {
     alert('your number is outside of the range\nplease follow insctrucitons')
   } else {
     createGrid(userSize);
-
+    colorNamer();
   }
 }
 
@@ -131,5 +155,16 @@ function clear() {
   globPix.forEach((pixel) => {
     pixel.style.backgroundColor = 'rgb(248, 248, 246)';
   })
+}
+
+function colorNamer(currCol) {
+  switch (currCol) {
+    case black: colorName = 'Black'; break;
+    case red: colorName = 'Red'; break;
+    case green: colorName = 'Green'; break;
+    case blue: colorName = 'Blue'; break;
+    case yellow: colorName = 'Yellow'; break;
+    case white: colorName = 'White'; break;
+  }
 }
 
