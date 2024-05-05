@@ -60,7 +60,7 @@ function createGrid(resolution) {
 }
 
 function adEv() {
-  pad.addEventListener('click', () => {
+  pad.addEventListener('click', e => {
     let pixels = document.querySelectorAll('.pixel');
     globPix = pixels;
 
@@ -76,6 +76,7 @@ function adEv() {
     pixels.forEach((pixel) => {
       pixel.addEventListener('mousemove', paint);
     })
+    e.target.style.backgroundColor = color;
   });
 }
 
