@@ -73,7 +73,7 @@ function adEv() {
     }
     // when user wants to paint every div mouse enter gets colored
     pixels.forEach((pixel) => {
-      pixel.addEventListener('mouseenter', paint);
+      pixel.addEventListener('mousemove', paint);
     })
   });
 }
@@ -141,13 +141,15 @@ function prevColor() {
 };
 
 function resize() {
-  pad.innerHTML = '';
-  let userSize = prompt('please input a number between 1 and 100')
+  let userSize = prompt('please input a number between 1 and 100\nsmall number = big pixels\nthis will clear the current drawing')
   if (userSize < 0 || userSize > 100) {
     alert('your number is outside of the range\nplease follow insctrucitons')
+  } else if (userSize === null) {
+    return;
   } else {
+    pad.innerHTML = '';
     createGrid(userSize);
-    colorNamer();
+    hoverEffect();
   }
 }
 
